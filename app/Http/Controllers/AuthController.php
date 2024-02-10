@@ -30,14 +30,15 @@ class AuthController extends Controller
             $user->roles()->attach($userRole);
         }
 
-        auth()->login($user);
+        $token = $user->createToken('authToken')->plainTextToken;
 
         return response()->json([
             'message' => 'Registration successful',
             'user' => $user,
+            'access_token' => $token,
+            'token_type' => 'Bearer',
         ]);
     }
-
     public function login(Request $request)
     {
         $request->validate([

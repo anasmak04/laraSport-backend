@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,8 +21,17 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
+
+
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+
+Route::post('/category', [CategoryController::class, 'save']);
+Route::get('/category/{id}', [CategoryController::class, 'findById']);
+Route::get('/category', [CategoryController::class, 'findAll']);
+Route::delete('/category/{id}', [CategoryController::class, 'delete']);
+Route::put('/category/{id}', [CategoryController::class, 'update']);
+
 
 Route::get("/message", function(){
     return response()->json([
