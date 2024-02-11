@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
@@ -10,27 +11,24 @@ use Exception;
 
 class CategoryController extends Controller
 {
-    public function save(Request $request)
+    public function store(CategoryRequest $request)
     {
         try {
-            $validatedData = $request->validate([
-                "name" => "required",
-                "description" => "required",
-            ]);
 
-            $category = Category::create($validatedData);
+            $category = Category::create($request);
 
             return response()->json([
                 "message" => "Category created successfully",
                 "category" => $category
             ]);
+
         } catch (Exception $e) {
             return response()->json(['error' => 'Category creation failed: ' . $e->getMessage()], 500);
         }
     }
 
 
-    public function findById($id)
+    public function show($id)
     {
         try{
             $category = Category::findOrFail($id);
@@ -47,7 +45,7 @@ class CategoryController extends Controller
         }
 
     }
-    public function findAll()
+    public function index()
     {
         try {
             $categories = Category::all();
@@ -62,7 +60,7 @@ class CategoryController extends Controller
     }
 
 
-    public function delete($id)
+    public function destroy($id)
     {
         try{
 
@@ -80,22 +78,18 @@ class CategoryController extends Controller
     }
 
 
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, $id)
     {
         try {
+
             $category = Category::findOrFail($id);
-
-            $validatedData = $request->validate([
-                "name" => "required",
-                "description" => "required",
-            ]);
-
-            $category->update($validatedData);
+            $category->update($request);
 
             return response()->json([
                 "message" => "Category updated successfully",
                 "category" => $category
             ]);
+
         } catch (Exception $e) {
             return response()->json(['error' => 'Failed to update category: ' . $e->getMessage()], 500);
         }

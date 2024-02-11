@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class PostController extends Controller
 {
 
-    public function save(Request $request)
+    public function store(Request $request)
     {
         try {
             $validatedData = $request->validate([
@@ -19,7 +19,6 @@ class PostController extends Controller
                 "publish_date" => "required|date",
                 "category_id" => "required|exists:categories,id",
                 "tags" => "sometimes|array",
-                "tags.*" => "exists:tags,id"
             ]);
 
             $validatedData['user_id'] = 1;
@@ -44,7 +43,7 @@ class PostController extends Controller
 
 
 
-    public function findall()
+    public function index()
     {
        try{
            $post = Post::all();
@@ -59,7 +58,7 @@ class PostController extends Controller
     }
 
 
-    public function findById($id)
+    public function show($id)
     {
         try {
             $post = Post::findOrFail($id);
@@ -73,7 +72,7 @@ class PostController extends Controller
         }
     }
 
-    public function delete($id)
+    public function destroy($id)
     {
         try {
 

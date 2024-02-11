@@ -10,7 +10,7 @@ class TagsController extends Controller
 {
     //
 
-    public function save(Request $request)
+    public function store(Request $request)
     {
         try{
             $tags = Tags::create($request->all());
@@ -24,7 +24,7 @@ class TagsController extends Controller
         }
     }
 
-    public function findByid($id)
+    public function show($id)
     {
         try{
 
@@ -39,7 +39,7 @@ class TagsController extends Controller
     }
 
 
-    public function findAll()
+    public function index()
     {
         try{
             $tags = Tags::all();
@@ -53,7 +53,7 @@ class TagsController extends Controller
     }
 
 
-    public function delete($id)
+    public function destroy($id)
     {
         try {
 
