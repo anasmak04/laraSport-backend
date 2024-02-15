@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\TagsResource;
 use App\Models\Tags;
 use Illuminate\Http\Request;
 
@@ -17,8 +18,8 @@ class TagsController extends Controller
 
             return response()->json([
                 "message" => "tags inserted successfully",
-                "tags" => $tags
-            ]);
+                "tags" => new TagsResource($tags)
+            ],200);
         }catch (\Exception $e){
             return response()->json(["error" => "failed to insert tag", $e->getMessage()], 500);
         }
@@ -31,8 +32,8 @@ class TagsController extends Controller
             $tags = Tags::findOrFail($id);
             return response()->json([
                 "message " => "tags retrieved successfully",
-                "tags" => $tags
-            ]);
+                "tags" => new TagsResource($tags)
+            ],200);
         }catch(\Exception $e){
             return response()->json(["error" => "failed to retrieve tag", $e->getMessage()], 500);
         }
@@ -45,8 +46,8 @@ class TagsController extends Controller
             $tags = Tags::all();
             return response()->json([
                 "message" => "tags retrieved successfully",
-                "tags" => $tags
-            ]);
+                "tags" => TagsResource::collection($tags)
+            ],200);
         }catch(\Exception $e){
             return response()->json(["error" => "failed to retrieve tag", $e->getMessage()], 500);
         }
@@ -82,8 +83,8 @@ class TagsController extends Controller
 
                 return response()->json([
                     "message" => "tags deleted successfully",
-                    "tags" => $tags
-                ]);
+                    "tags" => new TagsResource($tags)
+                ],200);
             } catch (\Exception $e) {
                 return response()->json(["error" => "failed to update tag", $e->getMessage()], 500);
             }

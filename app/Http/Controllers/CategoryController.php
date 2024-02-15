@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
+use App\Http\Resources\CategoryResource;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
@@ -19,8 +20,8 @@ class CategoryController extends Controller
 
             return response()->json([
                 "message" => "Category created successfully",
-                "category" => $category
-            ]);
+                "user" => CategoryResource::collection($category)
+            ],200);
 
         } catch (Exception $e) {
             return response()->json(['error' => 'Category creation failed: ' . $e->getMessage()], 500);
@@ -35,10 +36,9 @@ class CategoryController extends Controller
 
             return response()->json([
                 "message" => "category retrieved successfullt",
-                "category"=> $category
-            ]);
+                "category"=> CategoryResource::collection($category)
+            ],200);
         }
-
         catch (Exception $e){
             return response()->json(['error' => 'Failed to retrieve categories: ' . $e->getMessage()], 500);
 
@@ -52,8 +52,8 @@ class CategoryController extends Controller
 
             return response()->json([
                 "message" => "Categories retrieved successfully",
-                "categories" => $categories
-            ]);
+                "categories" => CategoryResource::collection($categories)
+            ],200);
         } catch (Exception $e) {
             return response()->json(['error' => 'Failed to retrieve categories: ' . $e->getMessage()], 500);
         }
@@ -87,8 +87,8 @@ class CategoryController extends Controller
 
             return response()->json([
                 "message" => "Category updated successfully",
-                "category" => $category
-            ]);
+                "category" => CategoryResource::collection($category)
+            ],200);
 
         } catch (Exception $e) {
             return response()->json(['error' => 'Failed to update category: ' . $e->getMessage()], 500);

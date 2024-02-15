@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserRessource;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -13,11 +14,12 @@ class UserController extends Controller
     {
         try {
             $user = User::all();
-
             return response()->json([
-                "message" => "user retrieved successfully",
-                "user" => $user
-            ]);
+                "message" => "successfully retrieved users",
+                "user" => UserRessource::collection($user)
+            ],200);
+
+
         }catch(\Exception $e){
             return response()->json(["error" => "failed to retrieve user", $e->getMessage()], 500);
         }
@@ -31,8 +33,8 @@ class UserController extends Controller
             $user = User::findOrFail($id);
             return response()->json([
                 "message" => "user retrieved successfully",
-                "user" => $user
-            ]);
+                "user" => new UserRessource($user)
+            ],200);
         }catch(\Exception $e){
             return response()->json(["error" => "failed to retrieve user", $e->getMessage()], 500);
         }
@@ -62,14 +64,14 @@ class UserController extends Controller
         try{
 
             $user = User::findOrFail($id);
-
-            $validateData  = $request->validate([
-                "name" => "required",
-                "email" => "required",
-            ]);
-
+            $validateData  = $request->validated();
 
             $user->update($validateData);
+
+            return response()->json([
+                "message" => "user updated successfully",
+                "user" => new UserRessource($user)
+            ]);
 
         }catch(\Exception $e){
             return response()->json(["error" => "failed to delete user", $e->getMessage()], 500);
