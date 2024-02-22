@@ -24,7 +24,7 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        $userRole = Role::where('name', 'user')->first();
+        $userRole = Role::where('name', 'Admin')->first();
         if ($userRole) {
             $user->roles()->attach($userRole);
         }

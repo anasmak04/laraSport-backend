@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Storage;
 
 class PostRequest extends FormRequest
 {
@@ -22,12 +23,15 @@ class PostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
-            "title" => "required",
-            "content" => "required",
+            "title" => "required|string|max:255",
+            "image" => "sometimes|file|image|max:10240", // for example, allowing up to 10MB images
+            "content" => "required|string",
             "publish_date" => "required|date",
-            "category_id" => "required|exists:categories,id",
             "tags" => "sometimes|array",
+            "user_id" => "required",
+            "category_id" => "required"
+            // remove the 'image_url' rule as it's not relevant here
         ];
     }
+
 }

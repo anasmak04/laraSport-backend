@@ -169,6 +169,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Laravel\Sanctum\SanctumServiceProvider::class,
+        Spatie\MediaLibrary\MediaLibraryServiceProvider::class,
     ])->toArray(),
 
     /*

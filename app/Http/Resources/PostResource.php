@@ -14,13 +14,26 @@ class PostResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return [
+        $data = [
             "id" => $this->id,
             "title" => $this->title,
             "content" => $this->content,
             "publish_date" => $this->publish_date,
-            "category_id" => $this->category_id,
+            "category" => $this->category ? $this->category->name : null,
             "user_id" => $this->user_id,
+            'image' => $this->getMedia('posts')->map(function ($item) {
+                return $item->getUrl();
+            }),
+
+            'tags' => $this->tags->map(function ($tag) {
+                return [
+                    'id' => $tag->id,
+                    'name' => $tag->name,
+                ];
+            }),
+
         ];
+
+        return $data;
     }
 }

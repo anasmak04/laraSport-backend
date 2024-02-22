@@ -15,16 +15,15 @@ class PostController extends Controller
     public function store(PostRequest $request)
     {
         try {
-
             $validatedData = $request->validated();
-
-            $validatedData['user_id'] = 1;
-
             $post = Post::create($validatedData);
-
+            if ($request->hasFile('image')) {
+                $post->addMediaFromRequest('image')->toMediaCollection('posts');
+            }
             if (!empty($request->tags)) {
                 $post->tags()->attach($request->tags);
             }
+
             return response()->json([
                 "message" => "Post created successfully",
                 "post" => new PostResource($post)
@@ -34,6 +33,7 @@ class PostController extends Controller
             return response()->json(['error' => 'Post creation failed: ' . $e->getMessage()], 500);
         }
     }
+
 
 
 

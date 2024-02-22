@@ -9,9 +9,13 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
 use Exception;
+use Illuminate\Support\Facades\Gate;
+use Symfony\Component\HttpFoundation\Response;
 
 class CategoryController extends Controller
 {
+
+
     public function store(CategoryRequest $request)
     {
         try {
@@ -20,7 +24,7 @@ class CategoryController extends Controller
 
             return response()->json([
                 "message" => "Category created successfully",
-                "user" => CategoryResource::collection($category)
+                "category" => CategoryResource::collection($category)
             ],200);
 
         } catch (Exception $e) {
@@ -45,7 +49,7 @@ class CategoryController extends Controller
         }
 
     }
-    public function index()
+    public function index(CategoryRequest $categoryRequest)
     {
         try {
             $categories = Category::all();
