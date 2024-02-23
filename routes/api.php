@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\TagsController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\api\auth\AuthController;
+use App\Http\Controllers\api\category\CategoryController;
+use App\Http\Controllers\api\event\EventController;
+use App\Http\Controllers\api\post\PostController;
+use App\Http\Controllers\api\tags\TagsController;
+use App\Http\Controllers\api\user\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -33,3 +34,4 @@ Route::apiResource('category', CategoryController::class);
 Route::apiResource('post', PostController::class);
 Route::apiResource('user', UserController::class);
 Route::apiResource('tags', TagsController::class);
+Route::apiResource('event', EventController::class);

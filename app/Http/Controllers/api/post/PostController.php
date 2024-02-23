@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\api\post;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -18,8 +16,9 @@ class PostController extends Controller
             $validatedData = $request->validated();
             $post = Post::create($validatedData);
             if ($request->hasFile('image')) {
-                $post->addMediaFromRequest('image')->toMediaCollection('posts');
+                $post->addMediaFromRequest('image')->toMediaCollection('posts','media_posts');
             }
+
             if (!empty($request->tags)) {
                 $post->tags()->attach($request->tags);
             }

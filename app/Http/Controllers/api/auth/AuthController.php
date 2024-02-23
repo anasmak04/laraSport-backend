@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\api\auth;
 
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\ValidationException;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;

@@ -36,6 +36,11 @@ return [
             'url' => env('APP_URL').'/media',
         ],
 
+        'media_posts' => [
+            'driver' => 'local',
+            'root' => public_path('media/posts'),
+            'url' => env('APP_URL').'/media/posts',
+        ],
 
         'local' => [
             'driver' => 'local',
