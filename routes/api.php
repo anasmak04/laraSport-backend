@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\api\auth\AuthController;
 use App\Http\Controllers\api\category\CategoryController;
+use App\Http\Controllers\api\city\CityController;
 use App\Http\Controllers\api\event\EventController;
 use App\Http\Controllers\api\post\PostController;
 use App\Http\Controllers\api\tags\TagsController;
@@ -35,3 +36,4 @@ Route::apiResource('post', PostController::class);
 Route::apiResource('user', UserController::class);
 Route::apiResource('tags', TagsController::class);
 Route::apiResource('event', EventController::class);
+Route::apiResource('city', CityController::class);
