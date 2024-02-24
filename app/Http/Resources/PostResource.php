@@ -22,9 +22,8 @@ class PostResource extends JsonResource
             "publish_date" => $this->publish_date,
             "category" =>  $this->category->name,
             "user" => $this->user->name,
-            'image' => $this->getMedia('posts')->map(function ($item) {
-                return $item->getUrl();
-            }),
+            'image' => $this->getFirstMediaUrl('posts'),
+
 
             'tags' => $this->tags->map(function ($tag) {
                 return [

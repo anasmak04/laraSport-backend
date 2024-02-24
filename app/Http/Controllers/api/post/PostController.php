@@ -70,7 +70,7 @@ class PostController extends Controller
         try {
 
             $post = Post::findOrFail($id);
-            $post->delete($id);
+            $post->delete();
 
             return response()->json([
                 "message" => "post deleted successfully",

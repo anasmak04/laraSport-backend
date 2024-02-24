@@ -46,7 +46,7 @@ class CityController extends Controller
     {
         try{
             $city = City::findOrFail($id);
-            $city->delete($id);
+            $city->delete();
 
             return response()->json(["message" => "city deleted successfully"]);
         }catch(\Exception $e){

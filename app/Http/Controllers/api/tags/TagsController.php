@@ -59,7 +59,7 @@ class TagsController extends Controller
         try {
 
             $tags = Tags::findOrFail($id);
-            $tags->delete($id);
+            $tags->delete();
 
             return response()->json([
                 "message" => "tags deleted successfully"

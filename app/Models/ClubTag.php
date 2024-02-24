@@ -5,13 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SportType extends Model
+class ClubTag extends Model
 {
     use HasFactory;
 
     protected $fillable = ["name"];
-    public function events()
+
+    public function clubs()
     {
-        return $this->hasMany(Event::class);
+        return $this->belongsToMany(Club::class);
     }
+
+
+
+
 }
