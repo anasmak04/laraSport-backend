@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string("name");
             $table->string("description");
-            $table->foreignId("club_tag_id")->constrained()->onDelete("cascade");
             $table->foreignId("city_id")->constrained()->onDelete("cascade");
             $table->timestamps();
         });

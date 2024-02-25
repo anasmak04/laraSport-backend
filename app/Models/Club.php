@@ -9,7 +9,7 @@ class Club extends Model
 {
     use HasFactory;
 
-    protected $fillable = ["name", "description", "club_tag_id","city_id"];
+    protected $fillable = ["name", "description","city_id"];
 
     public function clubstags(){
         return $this->belongsToMany(ClubTag::class);
