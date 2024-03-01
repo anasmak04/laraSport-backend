@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api\event;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\EventRequest;
+use App\Http\Resources\EventResource;
 use App\Models\Event;
 use Exception;
 use Illuminate\Http\Request;
@@ -18,7 +19,7 @@ class EventController extends Controller
 
         return response()->json([
             "message" => "events retrieved successfully",
-            "event" => $events
+            "event" => EventResource::collection($events)
         ]);
     }
 
@@ -78,21 +79,31 @@ class EventController extends Controller
 
 
 
-
-    public function store(EventRequest $request , Event $event)
+    public function store(EventRequest $request)
     {
-           try{
-               $event->save($request->all());
+        try {
+            $event = Event::create($request->validated());
 
-               return response()->json([
-                   "message" => "event stored successfully"
-               ]);
+            if ($request->hasFile('image')) {
+                $event->addMediaFromRequest('image')->toMediaCollection('events','media_events');
+            }
 
-           }
-    catch (\Exception $e) {
-        return response()->json(['error' => 'Post creation failed: ' . $e->getMessage()], 500);
+
+            if ($request->has('TagsClubs')) {
+                $event->clubTags()->attach($request->TagsClubs);
+            }
+
+            return response()->json([
+                "message" => "Event stored successfully",
+                "event" => new EventResource($event)
+            ], 201);
+
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Event creation failed: ' . $e->getMessage()], 500);
+        }
     }
-    }
+
+
 
 
 }

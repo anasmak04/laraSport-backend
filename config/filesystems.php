@@ -42,6 +42,12 @@ return [
             'url' => env('APP_URL').'/media/posts',
         ],
 
+        'media_events' => [
+            'driver' => 'local',
+            'root' => public_path('media/events'),
+            'url' => env('APP_URL').'/media/events',
+        ],
+
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),

@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Storage;
 
-class PostRequest extends FormRequest
+class ClubRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,14 +22,10 @@ class PostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "title" => "required|string|max:255",
-            "image" => "sometimes|file|image|max:10240",
-            "content" => "required|string",
-            "publish_date" => "required|date",
-            "tags" => "sometimes|array",
-            "user_id" => "required",
-            "category_id" => "required"
+            //
+            "name" => "required",
+            "description" => "required",
+            "city_id" => "required|exists:cities,id",
         ];
     }
-
 }

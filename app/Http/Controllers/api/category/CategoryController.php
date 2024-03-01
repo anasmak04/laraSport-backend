@@ -16,7 +16,7 @@ class CategoryController extends Controller
     {
         try {
 
-            $category = Category::create($request);
+            $category = Category::create($request->validated());
 
             return response()->json([
                 "message" => "Category created successfully",
@@ -83,7 +83,7 @@ class CategoryController extends Controller
         try {
 
             $category = Category::findOrFail($id);
-            $category->update($request);
+            $category->update($request->validated());
 
             return response()->json([
                 "message" => "Category updated successfully",

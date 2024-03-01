@@ -18,17 +18,18 @@ class EventRequest extends FormRequest
      * Get the validation rules that apply to the request.
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     *
      */
     public function rules(): array
     {
         return [
-            //
-            "name" => "required",
-            "image" => "required",
+            "title" => "required",
             "description" => "required",
             "content" => "required",
-            "date_event" => "required",
+            "event_date" => "required",
+            "image" => "sometimes|file|image|max:10240",
             "sport_type_id" => "required",
+            "TagsClubs" => "sometimes|array"
         ];
     }
 }

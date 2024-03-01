@@ -10,4 +10,9 @@ class TagsClub extends Model
     use HasFactory;
 
     protected $fillable = ["name"];
+
+    public function Events()    {
+        return $this->belongsToMany(Event::class);
+    }
+
 }

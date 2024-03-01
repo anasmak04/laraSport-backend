@@ -15,6 +15,7 @@ class PostController extends Controller
         try {
             $validatedData = $request->validated();
             $post = Post::create($validatedData);
+
             if ($request->hasFile('image')) {
                 $post->addMediaFromRequest('image')->toMediaCollection('posts','media_posts');
             }

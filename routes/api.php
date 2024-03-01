@@ -39,3 +39,4 @@ Route::apiResource('tags', TagsController::class);
 Route::apiResource('event', EventController::class);
 Route::apiResource('city', CityController::class);
 Route::get("city/{city}/clubs", [ClubController::class, "findClubByCity"]);
+Route::apiResource("clib", ClubController::class);
