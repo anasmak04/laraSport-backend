@@ -14,22 +14,25 @@ class PermissionSeeder extends Seeder
     public function run(): void
     {
         //
-        $permissions = [
-            [
-                'title' => 'category_access',
-            ],
-            [
-                'title' => 'category_edit',
-            ],
-            [
-                'title' => 'category_delete',
-            ],
-            [
-                'title' => 'category_create',
-            ],
-        ];
-        foreach ($permissions as $permission){
-            Permission::create($permission);
-        }
+//        $permissions = [
+//            [
+//                'title' => 'category_access',
+//            ],
+//            [
+//                'title' => 'category_edit',
+//            ],
+//            [
+//                'title' => 'category_delete',
+//            ],
+//            [
+//                'title' => 'category_create',
+//            ],
+//        ];
+//        foreach ($permissions as $permission){
+//            Permission::create($permission);
+//        }
+//    }
+
     }
+
 }

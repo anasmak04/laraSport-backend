@@ -12,7 +12,7 @@ class CategoryRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return Gate::allows("category.access");
+        return true;
     }
 
     /**
@@ -24,7 +24,6 @@ class CategoryRequest extends FormRequest
     {
         return [
             //
-
             "name" => "required",
             "description" => "required",
         ];

@@ -15,19 +15,16 @@ class CategoryController extends Controller
     public function store(CategoryRequest $request)
     {
         try {
-
             $category = Category::create($request->validated());
 
             return response()->json([
                 "message" => "Category created successfully",
-                "category" => CategoryResource::collection($category)
-            ],200);
-
+                "category" => new CategoryResource($category)
+            ], 201);
         } catch (Exception $e) {
             return response()->json(['error' => 'Category creation failed: ' . $e->getMessage()], 500);
         }
     }
-
 
     public function show($id)
     {
@@ -45,7 +42,7 @@ class CategoryController extends Controller
         }
 
     }
-    public function index(CategoryRequest $categoryRequest)
+    public function index()
     {
         try {
             $categories = Category::all();
