@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\api\club;
+namespace App\Http\Controllers\api\admin\club;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ClubRequest;
@@ -16,7 +16,6 @@ class ClubController extends Controller
     public function findClubByCity($cityid){
        try{
            $clubs = City::find($cityid)->clubs()->get();
-
            return response()->json([
                "message" => "clubs retrieved by city successfully",
                "club" => ClubRessource::collection($clubs)
@@ -31,7 +30,6 @@ class ClubController extends Controller
 
         try{
             $clubs = Club::all();
-
             return response()->json([
                 "message" => "clubs retrieved successfully",
                 "clubs" => ClubRessource::collection($clubs)
@@ -59,15 +57,23 @@ class ClubController extends Controller
 
     public function store(ClubRequest $request){
             try{
-                Club::store($request->validated());
-                return response()->json([
-                    "message" => "club inserted successfully"
+               $club = Club::create($request->validated());
+
+                if($request->hasFile("image")){
+                    $club->addMediaFromRequest("image")->toMediaCollection("clubs", "media_clubs");
+                }
+               return response()->json([
+                    "message" => "club inserted successfully",
+                    "club" => new ClubRessource($club)
                 ]);
+
+
 
             }catch(\Exception $e){
                 return response()->json(["message" => "something went wrong", $e->getMessage()]);
             }
     }
+
 
 
     public function delete($id)

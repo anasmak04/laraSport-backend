@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\api\category;
+namespace App\Http\Controllers\api\admin\category;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
@@ -33,7 +33,7 @@ class CategoryController extends Controller
 
             return response()->json([
                 "message" => "category retrieved successfullt",
-                "category"=> CategoryResource::collection($category)
+                "category"=> new CategoryResource($category)
             ],200);
         }
         catch (Exception $e){

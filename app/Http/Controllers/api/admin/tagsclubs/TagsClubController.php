@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\api\tagsclubs;
+namespace App\Http\Controllers\api\admin\tagsclubs;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 class TagsClubController extends Controller
 {

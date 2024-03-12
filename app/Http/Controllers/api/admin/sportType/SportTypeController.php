@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\api\sportType;
+namespace App\Http\Controllers\api\admin\sportType;
 
+use App\Http\Controllers\api\sportType\Event;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SportTypeRequest;
 use App\Models\SportType;
-use Illuminate\Http\Request;
 
 class SportTypeController extends Controller
 {

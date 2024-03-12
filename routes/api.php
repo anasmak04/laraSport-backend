@@ -1,13 +1,13 @@
 <?php
 
+use App\Http\Controllers\api\admin\category\CategoryController;
+use App\Http\Controllers\api\admin\city\CityController;
+use App\Http\Controllers\api\admin\club\ClubController;
+use App\Http\Controllers\api\admin\event\EventController;
+use App\Http\Controllers\api\admin\post\PostController;
+use App\Http\Controllers\api\admin\tags\TagsController;
+use App\Http\Controllers\api\admin\user\UserController;
 use App\Http\Controllers\api\auth\AuthController;
-use App\Http\Controllers\api\category\CategoryController;
-use App\Http\Controllers\api\city\CityController;
-use App\Http\Controllers\api\club\ClubController;
-use App\Http\Controllers\api\event\EventController;
-use App\Http\Controllers\api\post\PostController;
-use App\Http\Controllers\api\tags\TagsController;
-use App\Http\Controllers\api\user\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -39,4 +39,4 @@ Route::apiResource('tags', TagsController::class);
 Route::apiResource('event', EventController::class);
 Route::apiResource('city', CityController::class);
 Route::get("city/{city}/clubs", [ClubController::class, "findClubByCity"]);
-Route::apiResource("clib", ClubController::class);
+Route::apiResource("clubs", ClubController::class);

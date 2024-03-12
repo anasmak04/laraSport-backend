@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\api\user;
+namespace App\Http\Controllers\api\admin\user;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserRessource;

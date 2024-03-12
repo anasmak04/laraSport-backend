@@ -42,6 +42,21 @@ return [
             'url' => env('APP_URL').'/media/posts',
         ],
 
+
+        'media_clubs' => [
+            'driver' => 'local',
+            'root' => public_path('media/clubs'),
+            'url' => env('APP_URL').'/media/clubs',
+        ],
+
+
+
+        'media_cities' => [
+            'driver' => 'local',
+            'root' => public_path('media/cities'),
+            'url' => env('APP_URL').'/media/cities',
+        ],
+
         'media_events' => [
             'driver' => 'local',
             'root' => public_path('media/events'),

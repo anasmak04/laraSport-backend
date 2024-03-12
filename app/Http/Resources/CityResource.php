@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ClubRessource extends JsonResource
+class CityResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,12 +18,9 @@ class ClubRessource extends JsonResource
 
             "id" => $this->id,
             "name" => $this->name,
-            "description" => $this->description,
-            "city" => $this->city->name,
-            "image" => $this->getFirstMediaUrl("clubs"),
+            "image" => $this->getFirstMediaUrl("cities"),
         ];
 
         return $data;
-
     }
 }

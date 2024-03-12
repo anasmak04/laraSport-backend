@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ClubRequest extends FormRequest
+class StoreCityRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,10 +22,7 @@ class ClubRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
             "name" => "required",
-            "description" => "required",
-            "city_id" => "required|exists:cities,id",
             "image" => "sometimes|file|image|max:10240",
         ];
     }

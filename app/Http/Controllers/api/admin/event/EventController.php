@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\api\event;
+namespace App\Http\Controllers\api\admin\event;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\EventRequest;
 use App\Http\Resources\EventResource;
 use App\Models\Event;
 use Exception;
-use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
