@@ -22,11 +22,13 @@ class ClubRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
             "name" => "required",
             "description" => "required",
             "city_id" => "required|exists:cities,id",
             "image" => "sometimes|file|image|max:10240",
+            "tags" => "sometimes|array",
+            "tags.*" => "exists:club_tags,id"
         ];
     }
+
 }

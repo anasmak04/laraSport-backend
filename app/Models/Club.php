@@ -13,7 +13,7 @@ class Club extends Model implements HasMedia
 
     protected $fillable = ["name", "description","city_id"];
 
-    public function clubstags(){
+    public function clubTags() {
         return $this->belongsToMany(ClubTag::class);
     }
 

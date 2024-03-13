@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "73e8434bad7e61869428ae92fc92675b",
+    "content-hash": "fad5c8c87e31d8b6f2bab240dfaae2ee",
     "packages": [
         {
             "name": "0jkb/schemator",
