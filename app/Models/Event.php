@@ -24,7 +24,7 @@ class Event extends Model implements  HasMedia
 
     public function clubTags()
     {
-        return $this->belongsToMany(ClubTag::class, 'club_tag_event', 'event_id', 'club_tag_id');
+        return $this->belongsToMany(ClubTag::class);
     }
 
 

@@ -28,7 +28,6 @@ class PostRequest extends FormRequest
             "content" => "required|string",
             "publish_date" => "required|date",
             "tags" => "sometimes|array",
-            "user_id" => "required",
             "category_id" => "required"
         ];
     }

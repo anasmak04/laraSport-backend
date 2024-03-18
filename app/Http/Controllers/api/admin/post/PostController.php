@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -14,6 +15,8 @@ class PostController extends Controller
     {
         try {
             $validatedData = $request->validated();
+
+            $validatedData["user_id"] = Auth::id();
             $post = Post::create($validatedData);
 
             if ($request->hasFile('image')) {

@@ -29,7 +29,8 @@ class EventRequest extends FormRequest
             "event_date" => "required",
             "image" => "sometimes|file|image|max:10240",
             "sport_type_id" => "required",
-            "TagsClubs" => "sometimes|array"
+            "TagsClubs" => "sometimes|array",
+            "TagsClubs.*" => "exists:club_tags,id"
         ];
     }
 }

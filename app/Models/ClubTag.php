@@ -20,7 +20,7 @@ class ClubTag extends Model
 
     public function events()
     {
-        return $this->belongsToMany(Event::class, 'club_tag_event', 'club_tag_id', 'event_id');
+        return $this->belongsToMany(Event::class);
     }
 
 
