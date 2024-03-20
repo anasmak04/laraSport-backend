@@ -13,12 +13,11 @@ class UserController extends Controller
     public function index()
     {
         try {
-            $user = User::all();
+            $user = User::with("roles")->get();
             return response()->json([
                 "message" => "successfully retrieved users",
                 "user" => UserRessource::collection($user)
             ],200);
-
 
         }catch(\Exception $e){
             return response()->json(["error" => "failed to retrieve user", $e->getMessage()], 500);

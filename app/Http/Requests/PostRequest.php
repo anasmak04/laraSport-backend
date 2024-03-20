@@ -26,9 +26,9 @@ class PostRequest extends FormRequest
             "title" => "required|string|max:255",
             "image" => "sometimes|file|image|max:10240",
             "content" => "required|string",
-            "publish_date" => "required|date",
+            "category_id" => "required",
             "tags" => "sometimes|array",
-            "category_id" => "required"
+            "tags.*" => "exists:tags,id",
         ];
     }
 

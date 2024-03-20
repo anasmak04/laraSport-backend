@@ -7,6 +7,7 @@ use App\Http\Requests\PostRequest;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Date;
 
 class PostController extends Controller
 {
@@ -14,9 +15,15 @@ class PostController extends Controller
     public function store(PostRequest $request)
     {
         try {
-            $validatedData = $request->validated();
 
-            $validatedData["user_id"] = Auth::id();
+            if (!Auth::check()) {
+                return response()->json(['error' => 'Unauthorized'], 401);
+            }
+            $validatedData = $request->validated();
+             //$validatedData["user_id"] = Auth::id();
+             $validatedData["user_id"] = 1;
+            $validatedData["publish_date"]= Date::now();
+           
             $post = Post::create($validatedData);
 
             if ($request->hasFile('image')) {

@@ -5,6 +5,7 @@ use App\Http\Controllers\api\admin\city\CityController;
 use App\Http\Controllers\api\admin\club\ClubController;
 use App\Http\Controllers\api\admin\event\EventController;
 use App\Http\Controllers\api\admin\post\PostController;
+use App\Http\Controllers\api\admin\statistics\StatisticController;
 use App\Http\Controllers\api\admin\tags\TagsController;
 use App\Http\Controllers\api\admin\user\UserController;
 use App\Http\Controllers\api\auth\AuthController;
@@ -34,10 +35,16 @@ Route::post('/login', [AuthController::class, 'login']);
 
 
 Route::apiResource('category', CategoryController::class);
-Route::apiResource('post', PostController::class);
 Route::apiResource('user', UserController::class);
 Route::apiResource('tags', TagsController::class);
 Route::apiResource('event', EventController::class);
 Route::apiResource('city', CityController::class);
 Route::apiResource("clubs", ClubController::class);
 Route::get("city/{city}/clubs", [ClubController::class, "findClubByCity"]);
+Route::get("countusers", [StatisticController::class, "CountUsers"]);
+Route::get("countcategories", [StatisticController::class, "CountCategories"]);
+Route::get("countposts", [StatisticController::class, "CountPosts"]);
+Route::get("countcities", [StatisticController::class, "CountCitites"]);
+Route::get("countclubs", [StatisticController::class, "CountClubs"]);
+Route::apiResource('post', PostController::class);
+
