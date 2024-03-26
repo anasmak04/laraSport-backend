@@ -16,14 +16,11 @@ class PostController extends Controller
     {
         try {
 
-            if (!Auth::check()) {
-                return response()->json(['error' => 'Unauthorized'], 401);
-            }
             $validatedData = $request->validated();
              //$validatedData["user_id"] = Auth::id();
-             $validatedData["user_id"] = 1;
+             $validatedData["user_id"] = $request->user()->id;
             $validatedData["publish_date"]= Date::now();
-           
+
             $post = Post::create($validatedData);
 
             if ($request->hasFile('image')) {
@@ -43,7 +40,6 @@ class PostController extends Controller
             return response()->json(['error' => 'Post creation failed: ' . $e->getMessage()], 500);
         }
     }
-
 
 
 

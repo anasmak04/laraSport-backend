@@ -12,13 +12,18 @@ class Event extends Model implements  HasMedia
     use HasFactory , InteractsWithMedia;
 
 
-    protected $fillable = ["title", "description", "content", "event_date", "sport_type_id"];
+    protected $fillable = ["title", "description", "content", "event_date", "sport_type_id" , "city_id", "user_id"];
 
     public function sporttype()
     {
         return $this->belongsTo(SportType::class, 'sport_type_id');
     }
 
+
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
 
 
 
@@ -29,6 +34,10 @@ class Event extends Model implements  HasMedia
 
 
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
 
 

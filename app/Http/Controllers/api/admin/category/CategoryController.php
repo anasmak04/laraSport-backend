@@ -8,35 +8,21 @@ use App\Http\Resources\CategoryResource;
 use App\Models\Category;
 use Exception;
 
+
+
+
 class CategoryController extends Controller
 {
 
 
-
-
     /**
-     * @OA\Get(
-     *     path="/api/category",
-     *     operationId="getCategories",
-     *     tags={"Categories"},
-     *     summary="Get list of categories",
-     *     description="Returns all categories",
-     *     @OA\Response(
-     *         response=200,
-     *         description="Successful operation",
-     *         @OA\JsonContent(
-     *             type="array",
-     *             @OA\Items(ref="#/components/schemas/Category")
-     *         ),
-     *     ),
-     *     @OA\Response(
-     *         response=401,
-     *         description="Unauthenticated",
-     *     ),
-     *     @OA\Response(
-     *         response=403,
-     *         description="Forbidden"
-     *     )
+     *   @OA\Get(
+     *   path="/api/category",
+     *   tags={"categories"},
+     *   summary="Get all categories",
+     *   description="Retrieve a list of all categories",
+     *   @OA\Response(response="200", description="List of categories"),
+     *   @OA\Response(response="404", description="No category found"),
      * )
      */
     public function index()
@@ -54,32 +40,25 @@ class CategoryController extends Controller
 
 
 
-
     /**
-     * @OA\Post(
-     *     path="/api/category",
-     *     tags={"Categories"},
-     *     summary="Create a new category",
-     *     description="Stores a new category",
-     *     @OA\RequestBody(
-     *         @OA\JsonContent(
-     *             required={"name"},
-     *             @OA\Property(property="name", type="string", example="Sample Category"),
-     *             @OA\Property(property="description", type="string", example="Sample Category Description"),
-     *         ),
-     *     ),
-     *     @OA\Response(
-     *         response=201,
-     *         description="Category created successfully"
-     *     ),
-     *     @OA\Response(
-     *         response=500,
-     *         description="Error creating the category"
-     *     )
+     *  @OA\Post(
+     *  path="/api/category",
+     *  tags={"Categories"},
+     *  summary="Create a new category",
+     *  description="Create a new category with provided name and age",
+     *  @OA\RequestBody(
+     *  required=true,
+     *  @OA\JsonContent(
+        required={"name", "description"},
+     *  @OA\Property(property="name", type="string"),
+     *  @OA\Property(property="description", type="string"),
      * )
+     * ),
+     *  @OA\Response(response="201", description="Category created"),
+     *  @OA\Response(response="400", description="Bad request")
+     * )
+     * /
      */
-
-
     public function store(CategoryRequest $request)
     {
         try {
@@ -95,31 +74,25 @@ class CategoryController extends Controller
     }
 
 
+
     /**
      * @OA\Get(
-     *     path="/api/category/{id}",
-     *     tags={"Categories"},
-     *     summary="Get a single category",
-     *     description="Returns a single category by ID",
-     *     @OA\Parameter(
-     *         name="id",
-     *         description="ID of the category to return",
-     *         required=true,
-     *         in="path",
-     *         @OA\Schema(type="integer")
-     *     ),
-     *     @OA\Response(
-     *         response=200,
-     *         description="Successful operation"
-     *     ),
-     *     @OA\Response(
-     *         response=404,
-     *         description="Category not found"
-     *     )
+     * path="/api/category/{id}",
+     * tags={"categories"},
+     * summary="Get a category by ID",
+     * description="Retrieve a category by its ID",
+     * @OA\Parameter(
+     * name="id",
+     * in="path",
+     * required=true,
+     * description="ID of the category to retrieve",
+     * @OA\Schema(type="integer")
+     * ),
+     * @OA\Response(response="200", description="Category found"),
+     * @OA\Response(response="404", description="Category not found")
      * )
+     *
      */
-
-
     public function show($id)
     {
         try{
@@ -141,35 +114,23 @@ class CategoryController extends Controller
 
 
 
-
     /**
      * @OA\Delete(
-     *     path="/api/category/{id}",
-     *     tags={"Categories"},
-     *     summary="Delete a category",
-     *     description="Deletes a category by ID",
-     *     @OA\Parameter(
-     *         name="id",
-     *         description="ID of the category to delete",
-     *         required=true,
-     *         in="path",
-     *         @OA\Schema(type="integer")
-     *     ),
-     *     @OA\Response(
-     *         response=200,
-     *         description="Category deleted successfully"
-     *     ),
-     *     @OA\Response(
-     *         response=404,
-     *         description="Category not found"
-     *     ),
-     *     @OA\Response(
-     *         response=500,
-     *         description="Error deleting the category"
-     *     )
+     * path="/api/category/{id}",
+     * tags={"categories"},
+     * summary="Delete a category",
+     * description="Delete a category by its ID",
+     * @OA\Parameter(
+     * name="id",
+     * in="path",
+     * required=true,
+     * description="ID of the category to delete",
+     * @OA\Schema(type="integer")
+     * ),
+     * @OA\Response(response="204", description="Category deleted"),
+     * @OA\Response(response="404", description="Category not found")
      * )
      */
-
     public function destroy($id)
     {
         try{
@@ -190,39 +151,30 @@ class CategoryController extends Controller
 
     /**
      * @OA\Put(
-     *     path="/api/category/{id}",
-     *     tags={"Categories"},
-     *     summary="Update an existing category",
-     *     description="Updates data of an existing category",
-     *     @OA\Parameter(
-     *         name="id",
-     *         description="ID of the category to update",
-     *         required=true,
-     *         in="path",
-     *         @OA\Schema(type="integer")
-     *     ),
-     *     @OA\RequestBody(
-     *         @OA\JsonContent(
-     *             required={"name"},
-     *             @OA\Property(property="name", type="string", example="Updated Category Name"),
-     *             @OA\Property(property="description", type="string", example="Updated Category Description"),
-     *         ),
-     *     ),
-     *     @OA\Response(
-     *         response=200,
-     *         description="Category updated successfully"
-     *     ),
-     *     @OA\Response(
-     *         response=404,
-     *         description="Category not found"
-     *     ),
-     *     @OA\Response(
-     *         response=500,
-     *         description="Error updating the category"
-     *     )
+     * path="/api/category/{id}",
+     * tags={"categories"},
+     * summary="Update a category",
+     * description="Update the details of a category",
+     * @OA\Parameter(
+     * name="id",
+     * in="path",
+     * required=true,
+     * description="ID of the category to update",
+     * @OA\Schema(type="integer")
+     * ),
+     * @OA\RequestBody(
+     * required=true,
+     * @OA\JsonContent(
+     * required={"name", "description"},
+     * @OA\Property(property="name", type="string"),
+     * @OA\Property(property="description", type="string"),
+     * )
+     * ),
+     * @OA\Response(response="200", description="category updated"),
+     * @OA\Response(response="400", description="Bad request"),
+     * @OA\Response(response="404", description="category not found")
      * )
      */
-
     public function update(CategoryRequest $request, $id)
     {
         try {

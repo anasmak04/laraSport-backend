@@ -7,6 +7,7 @@ use App\Http\Controllers\ValidationException;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -46,6 +47,7 @@ class AuthController extends Controller
             'token_type' => 'Bearer',
         ]);
     }
+
     public function login(Request $request)
     {
         $request->validate([
@@ -53,18 +55,15 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
-        $user = User::where('email', $request->email)->first();
-
-        if (!$user || !Hash::check($request->password, $user->password)) {
-            throw ValidationException::withMessages([
-                'email' => ['The provided credentials are incorrect.'],
-            ]);
+        if (!Auth::attempt($request->only('email', 'password'))) {
+            return response()->json(['message' => 'Unauthorized'], 401);
         }
 
-        auth()->login($user);
+        $user = Auth::user();
+        $token = $user->createToken('authToken')->plainTextToken;
 
-        return response()->json([
-            'message' => 'Login successful',
-        ]);
+        return response()->json(['token' => $token]);
     }
+
+
 }

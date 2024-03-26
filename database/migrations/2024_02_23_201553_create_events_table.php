@@ -15,9 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string("title");
             $table->string("description");
-           $table->string("content");
+           $table->text("content");
             $table->date("event_date");
             $table->foreignId("sport_type_id")->constrained()->onDelete("cascade");
+            $table->foreignId("city_id")->constrained()->onDelete("cascade");
+            $table->foreignId("user_id")->constrained()->onDelete("cascade");
 
             $table->timestamps();
         });

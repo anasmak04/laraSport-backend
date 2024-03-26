@@ -23,6 +23,7 @@ class EventResource extends JsonResource
             "event_date" =>  $this->event_date,
             "image" => $this->getFirstMediaUrl("events"),
             "sport_type" => $this->sporttype->name,
+            "user" => $this->user->firstName . " " . $this->user->lastName,
             "tags" => $this->clubTags->map(function ($item) {
                 return $item->name;
             })

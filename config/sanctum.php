@@ -21,6 +21,8 @@ return [
         Sanctum::currentApplicationUrlWithPort()
     ))),
 
+
+
     /*
     |--------------------------------------------------------------------------
     | Sanctum Guards

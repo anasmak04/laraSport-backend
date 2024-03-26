@@ -27,11 +27,20 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class);
     }
 
+    public function hasRole($rolename) : bool
+    {
+        return Role::where("name",$rolename)->exists();
+    }
 
     public function post()
     {
         return $this->hasMany(Post::class);
     }
+    public function event()
+    {
+        return $this->belongsTo(Event::class);
+    }
+
 
 
     protected $fillable = [

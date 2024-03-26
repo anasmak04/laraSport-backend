@@ -20,4 +20,10 @@ class City extends Model implements HasMedia
     }
 
 
+    public function events()
+    {
+        return $this->hasMany(Event::class);
+    }
+
+
 }
